@@ -1,0 +1,1096 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Sora", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-editorial: "Bodoni Moda", Didot, "Bodoni MT", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+
+  /* Storefront type scale */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+
+  /* Shared storefront shape and spacing tokens */
+  --radius-card: 1rem;
+  --radius-control: 999px;
+  --spacing-page: 1.5rem;
+
+  /* Cartivo brand palette — deep navy to bright cyan/blue, matching the logo */
+  --color-ink: #0d1b2a;
+  --color-muted: #4a6074;
+  --color-faint: #8da3b8;
+  --color-surface: #f0f5fa;
+  --color-border: #d4e0ec;
+  --color-primary: #0a2a5e;
+  --color-primary-bright: #1a73e8;
+  --color-primary-soft: #e3edf9;
+  --color-accent: #00bcd4;
+  --color-accent-bright: #26c6da;
+  --color-success: #15803d;
+  --color-danger: #dc2626;
+  --color-warning: #f59e0b;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/assets/brand/fonts/inter-400.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/assets/brand/fonts/inter-500.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/assets/brand/fonts/inter-600.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Sora";
+  src: url("/assets/brand/fonts/sora-500.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Sora";
+  src: url("/assets/brand/fonts/sora-600.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Sora";
+  src: url("/assets/brand/fonts/sora-700.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Sora";
+  src: url("/assets/brand/fonts/sora-800.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+}
+
+/* Editorial serif used only by the campaign banners. It gives those panels
+   a printed, commissioned feel instead of the usual all-sans hero. */
+@font-face {
+  font-family: "Instrument Serif";
+  src: url("/assets/brand/fonts/instrument-serif-400.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+/* Didone face for the campaign banners. Bodoni Moda is the closest open
+   Didot-class design (SIL OFL), so real Didot / Bodoni MT are listed first
+   as local fallbacks on machines that license them. */
+@font-face {
+  font-family: "Bodoni Moda";
+  src: url("/assets/brand/fonts/bodoni-moda-400.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+/* Banner titles sit a step heavier than body-weight Didone so the hairlines
+   stay readable at offer-banner sizes. A real 600 face is served instead of
+   letting the browser fake a bold, which smears a Didone's thin strokes. */
+@font-face {
+  font-family: "Bodoni Moda";
+  src: url("/assets/brand/fonts/bodoni-moda-600-latin.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Bodoni Moda";
+  src: url("/assets/brand/fonts/bodoni-moda-600-latin-ext.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+    U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* No italics anywhere on the site: emphasis and small editorial elements
+   render upright in the regular weight instead of a slanted cut. */
+em, i, cite, address {
+  font-style: normal;
+}
+
+html {
+  scroll-behavior: smooth;
+  width: 100%;
+  /* clip, not hidden: hidden turns the root into a scroll container and
+     stops the sticky navbar from sticking. clip falls back to hidden. */
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-ink);
+  background: #ffffff;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/*
+  Site-wide scrollbars: transparent track, a semi-transparent thumb that is
+  always visible, and a slightly wider 14px hit area so dragging is easy.
+  A neutral slate keeps the thumb readable on the light storefront and on
+  the dark storefront/admin themes (the root scrollbar lives outside the
+  theme wrapper, so it cannot inherit the themed ink colour).
+*/
+*::-webkit-scrollbar {
+  width: 14px;
+  height: 14px;
+}
+*::-webkit-scrollbar-track,
+*::-webkit-scrollbar-corner {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.5);
+  border-radius: 999px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.75);
+}
+
+/* Firefox has no ::-webkit-scrollbar; give it the same transparent look. */
+@supports not selector(::-webkit-scrollbar) {
+  * {
+    scrollbar-width: auto;
+    scrollbar-color: rgba(100, 116, 139, 0.5) transparent;
+  }
+}
+
+/* hides the horizontal scrollbar on the category rail without hiding the scroll */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/*
+  Mobile refinements
+  - 16px controls stop iOS Safari from zooming into focused inputs.
+  - Segmented pills shrink so four sort options fit a 320px screen.
+  - Anchored fixed elements clear the notch/home bar on phones.
+*/
+@media (max-width: 639px) {
+  input,
+  select,
+  textarea {
+    font-size: 16px;
+  }
+
+  .hfx-nav-sliding-pill {
+    --hfx-size: 12px;
+    max-width: 100%;
+  }
+
+  .hfx-nav-sliding-pill a,
+  .hfx-nav-sliding-pill button {
+    padding: 0.55em 0.7em;
+  }
+}
+
+/*
+  Sliding-pill segmented control (adapted from the hfx-nav-sliding-pill
+  pattern). Used for every multi-option switcher: catalog sort selector,
+  product-image thumbnails, quantity steppers, and any other group of
+  small mutually-exclusive choices.
+
+  Theme integration: --hfx-color defaults to the active theme's primary
+  color, and the pill container picks up each theme's surface/border
+  tokens, so it works on the light storefront, dark storefront mode and
+  the dark admin theme without extra overrides.
+*/
+.hfx-nav-sliding-pill {
+  --c: var(--hfx-color, var(--color-primary));
+  --pos: 0;
+  position: relative;
+  isolation: isolate;
+  display: inline-grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  padding: 0.3em;
+  border: 1px solid color-mix(in srgb, var(--c) 30%, var(--color-border));
+  border-radius: 2em;
+  background: color-mix(in srgb, var(--c) 10%, var(--color-surface));
+  font: 600 var(--hfx-size, 14px) / 1.2 var(--font-body), system-ui, sans-serif;
+}
+
+/*
+  Indicator width adapts to the number of options: classes set --pill-count.
+  (One nth-child rule per count because CSS cannot compute "(100% / N)" from
+  a variable inside a child count.)
+*/
+.hfx-nav-sliding-pill { --pill-count: 4; }
+.hfx-nav-sliding-pill[data-count="3"] { --pill-count: 3; }
+.hfx-nav-sliding-pill[data-count="2"] { --pill-count: 2; }
+.hfx-nav-sliding-pill::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0.3em;
+  bottom: 0.3em;
+  left: 0.3em;
+  width: calc((100% - 0.6em) / var(--pill-count));
+  border-radius: 2em;
+  background: var(--c);
+  box-shadow: 0 0.3em 0.9em -0.2em color-mix(in srgb, var(--c) 70%, transparent);
+  transform: translateX(calc(var(--pos) * 100%));
+  transition: transform 0.45s cubic-bezier(0.34, 1.3, 0.64, 1);
+}
+
+.hfx-nav-sliding-pill a,
+.hfx-nav-sliding-pill button {
+  padding: 0.6em 1.1em;
+  border-radius: 2em;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: color-mix(in srgb, var(--color-ink) 55%, transparent);
+  text-align: center;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.hfx-nav-sliding-pill a:is(:hover, :focus-visible),
+.hfx-nav-sliding-pill button:is(:hover, :focus-visible) { color: var(--color-ink); }
+/*
+  Text sitting on the solid indicator always needs contrast against --c,
+  which differs per theme: on the light storefront the primary is dark navy
+  (white text), in dark storefront/admin the primary is a light blue
+  (dark text).
+*/
+.hfx-nav-sliding-pill a[aria-current="page"],
+.hfx-nav-sliding-pill button[aria-pressed="true"] {
+  color: var(--hfx-active-text, #ffffff);
+}
+.hfx-nav-sliding-pill:has(a:is(:hover, :focus-visible)) a[aria-current="page"]:not(:hover, :focus-visible),
+.hfx-nav-sliding-pill:has(button:is(:hover, :focus-visible)) button[aria-pressed="true"]:not(:hover, :focus-visible) {
+  color: color-mix(in srgb, var(--color-ink) 55%, transparent);
+}
+
+/* dark storefront: light-blue indicator needs dark text on top */
+.storefront-theme[data-theme="dark"] .hfx-nav-sliding-pill { --hfx-active-text: #0b1220; }
+
+/* Footer credit hover effect in dark mode - text turns black */
+.storefront-theme[data-theme="dark"] .footer-credit:hover span,
+.storefront-theme[data-theme="dark"] .footer-credit:hover .relative > *,
+.storefront-theme[data-theme="dark"] .footer-credit:focus-visible span,
+.storefront-theme[data-theme="dark"] .footer-credit:focus-visible .relative > * {
+  color: #000000 !important;
+}
+/* admin theme: same light-blue primary on a dark surface */
+.admin-theme .hfx-nav-sliding-pill { --hfx-active-text: #0b1220; }
+
+/* position of the sliding pill per option index (hover + focus, one per nth) */
+.hfx-nav-sliding-pill:has(:nth-child(1):is(:hover, :focus-visible)) { --pos: 0; }
+.hfx-nav-sliding-pill:has(:nth-child(2):is(:hover, :focus-visible)) { --pos: 1; }
+.hfx-nav-sliding-pill:has(:nth-child(3):is(:hover, :focus-visible)) { --pos: 2; }
+.hfx-nav-sliding-pill:has(:nth-child(4):is(:hover, :focus-visible)) { --pos: 3; }
+.hfx-nav-sliding-pill:has(:nth-child(5):is(:hover, :focus-visible)) { --pos: 4; }
+.hfx-nav-sliding-pill:has(:nth-child(6):is(:hover, :focus-visible)) { --pos: 5; }
+.hfx-nav-sliding-pill:has(:nth-child(7):is(:hover, :focus-visible)) { --pos: 6; }
+.hfx-nav-sliding-pill:has(:nth-child(8):is(:hover, :focus-visible)) { --pos: 7; }
+
+/*
+  Current/selected option also pins the pill to that index — this is the
+  resting state; the transition animates on hover in / out.
+*/
+.hfx-nav-sliding-pill a[aria-current="page"] { --pos: var(--hfx-active, 0); }
+.hfx-nav-sliding-pill:has(a[aria-current="page"]) { --pos: var(--hfx-active, 0); }
+.hfx-nav-sliding-pill:has(button[aria-pressed="true"]) { --pos: var(--hfx-active, 0); }
+
+@media (prefers-reduced-motion: reduce) {
+  .hfx-nav-sliding-pill,
+  .hfx-nav-sliding-pill *,
+  .hfx-nav-sliding-pill::before,
+  .hfx-nav-sliding-pill::after,
+  .hfx-nav-sliding-pill *::before,
+  .hfx-nav-sliding-pill *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/*
+  AuthModal card-swap animation. The Login / Create-account views sit on
+  top of each other in the same grid cell; the active one gets
+  opacity/transform/height auto and the inactive one collapses, so the
+  card morphs smoothly between the two heights while the content cross-
+  fades with a slight directional slide. The panel itself uses the same
+  trick so its entrance animates too.
+*/
+.auth-card-swap {
+  display: grid;
+}
+
+.auth-card-swap > * {
+  grid-area: 1 / 1;
+  min-width: 0;
+  transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.34, 1.2, 0.5, 1);
+  visibility: hidden;
+  opacity: 0;
+  transform: translateX(1rem); /* slide in from the right when appearing */
+}
+
+/* inactive view collapses to zero height so the panel height morphs */
+.auth-card-swap > *[aria-hidden="true"] {
+  height: 0;
+  overflow: hidden;
+  transform: translateX(-1rem); /* slides out to the left */
+}
+
+.auth-card-swap > *[aria-hidden="false"] {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/*
+  Modal entrance: backdrop fades and the card lifts to its resting spot.
+*/
+.auth-backdrop {
+  animation: auth-backdrop-in 0.25s ease both;
+}
+.auth-panel {
+  animation: auth-panel-in 0.35s cubic-bezier(0.34, 1.3, 0.64, 1) both;
+}
+
+@keyframes auth-backdrop-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes auth-panel-in {
+  from { opacity: 0; transform: translateY(14px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auth-card-swap > *,
+  .auth-backdrop,
+  .auth-panel {
+    animation: none !important;
+    transition: none !important;
+  }
+  .auth-card-swap > *[aria-hidden="true"] {
+    transform: none;
+  }
+}
+
+/*
+  Brand logo colour shift. Hue cycles through the brand-blue family
+  (navy -> blue -> cyan and back), so the logo feels alive without
+  wandering into unrelated hues. Applied to the navbar and footer logos.
+*/
+@keyframes logo-huecycle {
+  0%, 100% { filter: hue-rotate(0deg) saturate(1); }
+  25% { filter: hue-rotate(-14deg) saturate(1.25); }
+  60% { filter: hue-rotate(10deg) saturate(1.15); }
+}
+.logo-colorshift {
+  animation: logo-huecycle 7s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .logo-colorshift { animation: none; }
+}
+
+/*
+  Morphing hamburger icon. Three bars collapse into an X via transform
+  transitions (no icon swap), so open/close animates both ways.
+*/
+/* Visibility is controlled by the button's utility classes (flex / lg:hidden).
+   Do not set display here: unlayered CSS would override Tailwind's lg:hidden. */
+.hamburger {
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 999px;
+  transition: background-color 0.25s ease;
+}
+.hamburger:hover, .hamburger:focus-visible {
+  background: var(--color-surface);
+}
+.hamburger span {
+  position: absolute;
+  height: 2px;
+  width: 1.3rem;
+  border-radius: 2px;
+  background: currentColor;
+  transition: transform 0.32s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.22s ease;
+}
+.hamburger span:nth-child(1) { transform: translateY(-0.34rem); }
+.hamburger span:nth-child(3) { transform: translateY(0.34rem); }
+.hamburger[aria-expanded="true"] span:nth-child(1) { transform: rotate(45deg); }
+.hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; transform: scaleX(0.4); }
+.hamburger[aria-expanded="true"] span:nth-child(3) { transform: rotate(-45deg); }
+
+/*
+  Smooth expand/collapse for the mobile search bar and menu. Always
+  rendered (not conditionally mounted) so the grid-rows transition can
+  animate the height; the inner wrapper clips while collapsed.
+*/
+.nav-collapse {
+  /* display comes from the `grid` + `lg:hidden` utilities on the element */
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: grid-template-rows 0.38s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.28s ease, transform 0.32s ease;
+  pointer-events: none;
+}
+.nav-collapse.nav-open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.nav-collapse > * {
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* Sticky navbar: a soft shadow appears once the page scrolls under it. It is
+   kept as a shadow only — changing the padding would resize the sticky header
+   and nudge the content below it every time you start scrolling. */
+.navbar-scrolled {
+  box-shadow: 0 10px 24px -16px rgb(13 27 42 / 45%), 0 2px 6px -4px rgb(13 27 42 / 25%);
+}
+
+/*
+  Mobile menu as an overlay. Instead of growing the sticky header — which
+  pushes the whole page down and can shove the header out of view — the drawer
+  and its scrim are fixed just below the header, so the page underneath never
+  moves. --cartivo-nav-h is written by <Navbar/> whenever the header height
+  changes (logo breakpoint, search row opening); the 4.5rem fallback covers
+  the first paint before the observer runs.
+*/
+.nav-overlay-scrim {
+  position: fixed;
+  inset: 0;
+  top: var(--cartivo-nav-h, 4.5rem);
+  z-index: 40;
+  background: rgb(11 18 32 / 45%);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+}
+.nav-overlay-scrim.nav-open {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease, visibility 0s linear 0s;
+}
+
+.nav-overlay-panel {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: var(--cartivo-nav-h, 4.5rem);
+  z-index: 40;
+  max-height: calc(100vh - var(--cartivo-nav-h, 4.5rem));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  box-shadow: 0 24px 48px -28px rgb(11 18 32 / 55%);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity 0.3s ease, transform 0.34s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s linear 0.34s;
+}
+.nav-overlay-panel.nav-open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: opacity 0.3s ease, transform 0.34s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s linear 0s;
+}
+
+/* Product card "Add" button confirmation: a short pop when it flips to Added. */
+@keyframes cartivo-added-pop {
+  0% { transform: scale(0.92); }
+  60% { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
+
+.cartivo-added-pop {
+  animation: cartivo-added-pop 0.32s ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-collapse, .hamburger, .hamburger span,
+  .nav-overlay-panel, .nav-overlay-scrim { transition: none !important; }
+}
+
+/*
+  Shared motion language: route changes and newly revealed campaign content
+  use short opacity/transform animations; controls respond immediately but
+  ease their visual states rather than snapping.
+*/
+.page-enter {
+  animation: page-enter 0.48s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.route-logo-loader {
+  position: fixed;
+  z-index: 60;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgb(255 255 255 / 38%);
+  backdrop-filter: blur(3px);
+  pointer-events: none;
+  animation: route-loader-in 180ms ease-out both;
+}
+
+.storefront-theme[data-theme="dark"] .route-logo-loader {
+  background: rgb(7 14 25 / 46%);
+}
+
+.route-logo-loader-card {
+  display: flex;
+  min-width: 14rem;
+  min-height: 9rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.1rem;
+  padding: 1.5rem 2rem;
+  border: 1px solid color-mix(in srgb, var(--color-border) 82%, transparent);
+  border-radius: 1.25rem;
+  background: var(--color-surface);
+  box-shadow: 0 18px 48px rgb(13 27 42 / 16%);
+}
+
+.route-logo-loader-image {
+  display: block;
+  width: clamp(7rem, 28vw, 9rem);
+  height: auto;
+  clip-path: inset(0 0 0 100%);
+  animation: logo-write-erase 1.05s cubic-bezier(0.55, 0.08, 0.35, 1) both;
+}
+
+.route-logo-loader-track {
+  width: 5.5rem;
+  height: 2px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--color-border);
+}
+
+.route-logo-loader-track::after {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+  content: "";
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: route-loader-progress 1.05s ease-in-out both;
+}
+
+@keyframes logo-write-erase {
+  0% { clip-path: inset(0 0 0 100%); }
+  48%, 64% { clip-path: inset(0 0 0 0); }
+  100% { clip-path: inset(0 100% 0 0); }
+}
+
+@keyframes route-loader-progress {
+  0% { transform: scaleX(0); }
+  64% { transform: scaleX(1); }
+  100% { transform: scaleX(0); transform-origin: right; }
+}
+
+@keyframes route-loader-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes page-enter {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.cartivo-banner-reveal {
+  animation: cartivo-banner-reveal 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes cartivo-banner-reveal {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.cartivo-campaign-art {
+  animation: cartivo-art-reveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes cartivo-art-reveal {
+  from { opacity: 0.72; transform: scale(1.015); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.cartivo-control,
+button,
+a,
+input,
+select,
+textarea {
+  transition-property: color, background-color, border-color, box-shadow, opacity, transform;
+  transition-duration: 180ms;
+  transition-timing-function: cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+
+button:active:not(:disabled) {
+  transform: scale(0.975);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-enter,
+  .cartivo-banner-reveal,
+  .cartivo-campaign-art { animation: none !important; }
+  .route-logo-loader { animation: none !important; }
+  .route-logo-loader-image { clip-path: none; animation: none !important; }
+  .route-logo-loader-track::after { transform: scaleX(1); animation: none !important; }
+  button:active:not(:disabled) { transform: none; }
+  button, a, input, select, textarea { transition-duration: 0.01ms !important; }
+}
+
+/*
+  Admin section lives at /admin inside this same app. Rather than a second
+  @theme (which would redefine colors for the whole site), the admin
+  subtree is wrapped in a ".admin-theme" element and these custom
+  properties override the light storefront ones only inside it.
+*/
+.admin-theme {
+  --color-bg: #0a1628;
+  --color-surface: #101e33;
+  --color-surface-soft: #162846;
+  --color-border: #1e3556;
+  --color-ink: #e8f0fb;
+  --color-muted: #8da3c0;
+  --color-faint: #8da3c0;
+  --color-primary: #1a73e8;
+  --color-primary-bright: #4da3ff;
+  --color-primary-soft: #12294d;
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+  --color-accent: #00bcd4;
+
+  background: var(--color-bg);
+  color: var(--color-ink);
+  min-height: 100vh;
+}
+
+/* The admin subtree keeps its own dark palette. This theme applies to the storefront only. */
+.storefront-theme {
+  min-height: 100vh;
+  background: #ffffff;
+  color: var(--color-ink);
+  transition: background-color 180ms ease, color 180ms ease;
+}
+
+.storefront-theme[data-theme="dark"] {
+  color-scheme: dark;
+  --color-ink: #edf4ff;
+  --color-muted: #b5c3d6;
+  --color-faint: #8ea0b8;
+  --color-surface: #172538;
+  --color-border: #2b3b51;
+  --color-primary: #79b7ff;
+  --color-primary-bright: #83c0ff;
+  --color-primary-soft: #1a3352;
+  --color-accent: #39c7dc;
+  --color-success: #4ade80;
+  --color-danger: #fb7185;
+  --color-warning: #fbbf24;
+  background: #0b1220;
+  color: var(--color-ink);
+}
+
+.storefront-theme[data-theme="dark"] [class~="bg-white"],
+.storefront-theme[data-theme="dark"] [class~="bg-white/95"] {
+  background-color: #111c2c;
+}
+
+.storefront-theme[data-theme="dark"] [class~="bg-white/70"] {
+  background-color: rgb(11 18 32 / 78%);
+}
+
+.storefront-theme[data-theme="dark"] [class~="bg-slate-50"] {
+  background-color: #111c2c;
+}
+
+.storefront-theme[data-theme="dark"] [class~="bg-slate-100"] {
+  background-color: #1b2a3d;
+}
+
+.storefront-theme[data-theme="dark"] [class~="bg-emerald-50"] { background-color: #112c27; }
+.storefront-theme[data-theme="dark"] [class~="bg-blue-50"] { background-color: #122b46; }
+.storefront-theme[data-theme="dark"] [class~="bg-purple-50"] { background-color: #2b2040; }
+.storefront-theme[data-theme="dark"] [class~="bg-sky-50"] { background-color: #102b40; }
+.storefront-theme[data-theme="dark"] [class~="bg-amber-50"] { background-color: #382b17; }
+.storefront-theme[data-theme="dark"] [class~="bg-indigo-50"] { background-color: #202643; }
+.storefront-theme[data-theme="dark"] [class~="bg-rose-50"] { background-color: #351d2b; }
+
+.storefront-theme[data-theme="dark"] [class~="text-slate-950"],
+.storefront-theme[data-theme="dark"] [class~="text-slate-900"],
+.storefront-theme[data-theme="dark"] [class~="text-slate-800"],
+.storefront-theme[data-theme="dark"] [class~="text-slate-700"],
+.storefront-theme[data-theme="dark"] [class~="text-slate-600"],
+.storefront-theme[data-theme="dark"] [class~="text-slate-500"],
+.storefront-theme[data-theme="dark"] [class~="text-gray-700"] {
+  color: #d5e0ef;
+}
+
+.storefront-theme[data-theme="dark"] [class~="text-slate-400"],
+.storefront-theme[data-theme="dark"] [class~="text-slate-300"] {
+  color: #93a5bd;
+}
+
+.storefront-theme[data-theme="dark"] [class~="text-sky-600"],
+.storefront-theme[data-theme="dark"] [class~="text-blue-600"],
+.storefront-theme[data-theme="dark"] [class~="text-cyan-600"],
+.storefront-theme[data-theme="dark"] [class~="text-emerald-600"],
+.storefront-theme[data-theme="dark"] [class~="text-emerald-700"],
+.storefront-theme[data-theme="dark"] [class~="text-blue-700"],
+.storefront-theme[data-theme="dark"] [class~="text-purple-700"],
+.storefront-theme[data-theme="dark"] [class~="text-sky-700"],
+.storefront-theme[data-theme="dark"] [class~="text-amber-700"],
+.storefront-theme[data-theme="dark"] [class~="text-indigo-700"],
+.storefront-theme[data-theme="dark"] [class~="text-rose-700"] {
+  color: #91c7ff;
+}
+
+.storefront-theme[data-theme="dark"] [class~="border-slate-100"],
+.storefront-theme[data-theme="dark"] [class~="border-slate-200"] {
+  border-color: #2b3b51;
+}
+
+.storefront-theme[data-theme="dark"] [class~="bg-[var(--color-primary)]"] {
+  background-color: #1a73e8;
+}
+
+.storefront-theme[data-theme="dark"] [class~="hover:bg-sky-50"]:hover,
+.storefront-theme[data-theme="dark"] .group:hover [class~="group-hover:bg-sky-50"] {
+  background-color: #20354d;
+}
+
+.storefront-theme[data-theme="dark"] [class~="focus:bg-white"]:focus {
+  background-color: #172538;
+}
+
+.storefront-theme[data-theme="dark"] .storefront-hero-overlay {
+  background-image: linear-gradient(90deg, rgb(11 18 32 / 96%) 0%, rgb(11 18 32 / 78%) 45%, transparent 100%);
+}
+
+.cartivo-hero-light,
+.cartivo-promo-light {
+  --cartivo-banner-ink: #172b43;
+  --cartivo-banner-copy: #1c3348;
+  --cartivo-banner-accent: #0b3d7a;
+}
+
+.cartivo-hero-dark,
+.cartivo-promo-dark {
+  --cartivo-banner-ink: #e0e9ff;
+  --cartivo-banner-copy: #cfe2f5;
+  --cartivo-banner-accent: #b3e0ff;
+}
+
+/* Light campaign artwork still needs light-mode typography when the site is dark. */
+.cartivo-hero-title-dark { color: #edf4ff; text-shadow: 0 1px 10px rgb(8 18 32 / 18%); }
+.cartivo-hero-copy-dark { color: #d4e2f1; }
+.cartivo-hero-link-dark { color: #edf4ff; }
+.cartivo-hero-dark .cartivo-banner-title,
+.cartivo-hero-dark .cartivo-banner-description,
+.cartivo-hero-dark .cartivo-banner-eyebrow,
+.cartivo-hero-dark .cartivo-hero-link-dark { text-shadow: 0 1px 10px rgb(8 18 32 / 28%); }
+
+/* Only the category header keeps a scrim: its copy sits over category photos
+   that have no clear area, unlike the campaign and offer artwork. The scrim
+   still follows the copy, which stays in the artwork's clearer left region. */
+.cartivo-catalog-hero.cartivo-hero-light .cartivo-hero-wash {
+  background: linear-gradient(90deg, rgb(250 248 243 / 46%) 0%, rgb(250 248 243 / 32%) 31%, rgb(250 248 243 / 12%) 52%, transparent 68%);
+}
+
+.cartivo-catalog-hero.cartivo-hero-dark .cartivo-hero-wash {
+  background: linear-gradient(90deg, rgb(9 18 32 / 68%) 0%, rgb(9 18 32 / 50%) 34%, rgb(9 18 32 / 20%) 56%, transparent 72%);
+}
+
+.cartivo-banner-title {
+  color: var(--cartivo-banner-ink);
+  font-family: var(--font-editorial);
+  /* the 600 face above: slightly bold Didone, still upright */
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  text-wrap: balance;
+}
+
+.cartivo-banner-description {
+  color: var(--cartivo-banner-copy);
+}
+
+.cartivo-banner-eyebrow {
+  color: var(--cartivo-banner-accent);
+  font-family: var(--font-editorial);
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* Hairline underline that tightens on hover; used on the banner text links. */
+.cartivo-banner-link {
+  border-bottom: 1px solid color-mix(in srgb, currentColor 42%, transparent);
+  padding-bottom: 2px;
+  transition: border-color 180ms ease;
+}
+
+.group:hover .cartivo-banner-link {
+  border-color: currentColor;
+}
+
+/* Offer banners show the artwork untouched: no gradient wash and no dimming
+   filter. Their copy sits below the photo on the page background, so it keeps
+   the normal theme palette. */
+.cartivo-promo-light {
+  border-color: #dce5ec;
+}
+
+.cartivo-promo-dark {
+  border-color: #2b3b51;
+}
+
+.cartivo-promo-light,
+.cartivo-promo-dark {
+  box-shadow: none !important;
+  text-shadow: none !important;
+  text-decoration: none !important;
+}
+
+.cartivo-hero,
+.cartivo-catalog-hero {
+  box-shadow: none !important;
+  text-shadow: none !important;
+  text-decoration: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .storefront-theme { transition: none; }
+}
+
+/* First-visit demo gate: fades the scrim in and lifts the panel slightly. */
+.demo-gate-backdrop {
+  animation: demo-gate-fade 200ms ease-out both;
+}
+
+.demo-gate-panel {
+  animation: demo-gate-rise 280ms cubic-bezier(0.22, 0.8, 0.3, 1) both;
+}
+
+@keyframes demo-gate-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes demo-gate-rise {
+  from { opacity: 0; transform: translateY(16px) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .demo-gate-backdrop,
+  .demo-gate-panel {
+    animation: none;
+  }
+}
+
+/* ---------------- Brand splash / loading screen ---------------- */
+
+.splash-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 130;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  background: #ffffff;
+}
+
+.storefront-theme[data-theme="dark"] .splash-screen {
+  background: #0b1220;
+}
+
+.splash-wordmark {
+  position: relative;
+  display: inline-block;
+  line-height: 0;
+}
+
+.splash-logo {
+  height: clamp(44px, 9vw, 68px);
+  width: auto;
+  clip-path: inset(0 100% 0 0);
+  animation: splash-type 1.15s cubic-bezier(0.33, 0.1, 0.25, 1) 0.15s forwards;
+}
+
+.splash-caret {
+  position: absolute;
+  top: 10%;
+  bottom: 10%;
+  left: 0;
+  width: 2px;
+  border-radius: 2px;
+  background: var(--color-primary-bright);
+  opacity: 0;
+  animation: splash-caret-run 1.15s cubic-bezier(0.33, 0.1, 0.25, 1) 0.15s forwards;
+}
+
+.splash-tagline {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  opacity: 0;
+  animation: splash-rise 0.5s ease-out 0.85s forwards;
+}
+
+.splash-progress {
+  width: min(220px, 55vw);
+  height: 2px;
+  border-radius: 999px;
+  background: var(--color-border);
+  overflow: hidden;
+  opacity: 0;
+  animation: splash-rise 0.4s ease-out 0.55s forwards;
+}
+
+.splash-progress span {
+  display: block;
+  height: 100%;
+  width: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+  animation: splash-progress calc(var(--splash-ms) * 0.74) ease-in-out 0.3s forwards;
+}
+
+.splash-screen-leaving {
+  animation: splash-fade-out 320ms ease-in forwards;
+}
+
+@keyframes splash-type {
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes splash-caret-run {
+  0% {
+    left: 0;
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes splash-rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes splash-progress {
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes splash-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .splash-logo {
+    clip-path: none;
+    animation: none;
+  }
+
+  .splash-caret {
+    display: none;
+  }
+
+  .splash-tagline,
+  .splash-progress {
+    opacity: 1;
+    animation: none;
+  }
+
+  .splash-progress span {
+    width: 100%;
+    animation: none;
+  }
+
+  .splash-screen-leaving {
+    animation: splash-fade-out 200ms ease-in forwards;
+  }
+}

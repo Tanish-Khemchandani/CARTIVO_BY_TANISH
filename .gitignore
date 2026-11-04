@@ -1,0 +1,28 @@
+# Dependencies and generated builds
+node_modules/
+client/dist/
+server/dist/
+
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+server/.env
+server/.env.*
+!server/.env.example
+
+# Runtime uploads, logs, and local process state
+server/uploads/
+tmp/
+*.log
+*.pid
+
+# Internal development notes
+/builtup.txt
+/CARTIVO-Development-Plan.md
+
+# Editor and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 116" role="img" aria-labelledby="title">
+  <title id="title">CARTIVO</title>
+  <defs>
+    <linearGradient id="cartivo-mark" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#42d0e3"/>
+      <stop offset="1" stop-color="#79b7ff"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke="url(#cartivo-mark)" stroke-linecap="round" stroke-linejoin="round" stroke-width="9">
+    <path d="M10 14h15l12 54a9 9 0 0 0 9 7h50a9 9 0 0 0 9-7l11-39H40"/>
+    <path d="M48 49h56M56 91a8 8 0 1 0 0 16 8 8 0 0 0 0-16ZM91 91a8 8 0 1 0 0 16 8 8 0 0 0 0-16Z"/>
+  </g>
+  <text x="132" y="81" fill="#edf4ff" font-family="Arial, Helvetica, sans-serif" font-size="66" font-weight="700" letter-spacing="2">CARTIVO</text>
+</svg>
