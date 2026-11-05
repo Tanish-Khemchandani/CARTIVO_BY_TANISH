@@ -229,14 +229,10 @@ export default function Footer() {
       <div className="border-t border-[var(--color-border)]">
         <div className="w-full flex flex-col items-center justify-between gap-2 px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 py-4 text-xs text-[var(--color-muted)] sm:flex-row">
           <p>© 2026 {settings.siteName}. All rights reserved.</p>
-          <a href="https://tanishkhemchandani.vercel.app" target="_blank" rel="noopener noreferrer" className="relative footer-credit group inline-flex items-center gap-3 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] px-5 py-3 text-[var(--color-ink)] transition hover:border-red-500/60 hover:bg-white/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2"
+          <a href="https://tanishkhemchandani.vercel.app" target="_blank" rel="noopener noreferrer" className="footer-credit inline-flex items-center gap-3 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] px-5 py-3 text-[var(--color-muted)] transition-colors duration-200 hover:border-[#C90000] focus-visible:border-[#C90000] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C90000] focus-visible:ring-offset-2"
             aria-label="Designed and Developed by Tanish Khemchandani — opens portfolio in a new tab"
           >
-            <span className="text-base font-semibold tracking-wide sm:text-lg">Designed and Developed by</span>
-            <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <div className="absolute -inset-1.5 rounded-full border border-[color:#C90000] border-2 opacity-70 animate-pulse"></div>
-              <div className="absolute inset-0 rounded-full w-20 h-20 border-4 border-[color:#C90000] opacity-30 animate-pulse-[4s]_ease-in-out_loop"></div>
-            </div>
+            <span className="relative z-[1] text-base font-semibold tracking-wide sm:text-lg">Designed and Developed by</span>
             <img
               src="/assets/brand/tk-logo.png"
               alt="TK"
@@ -244,7 +240,7 @@ export default function Footer() {
               height="42"
               loading="lazy"
               decoding="async"
-              className="relative h-12 w-auto object-contain transition-transform duration-200 group-hover:scale-105 sm:h-14"
+              className="relative z-[1] h-12 w-auto object-contain sm:h-14"
             />
           </a>
         </div>

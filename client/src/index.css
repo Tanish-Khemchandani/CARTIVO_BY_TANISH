@@ -318,13 +318,6 @@ body {
 /* dark storefront: light-blue indicator needs dark text on top */
 .storefront-theme[data-theme="dark"] .hfx-nav-sliding-pill { --hfx-active-text: #0b1220; }
 
-/* Footer credit hover effect in dark mode - text turns black */
-.storefront-theme[data-theme="dark"] .footer-credit:hover span,
-.storefront-theme[data-theme="dark"] .footer-credit:hover .relative > *,
-.storefront-theme[data-theme="dark"] .footer-credit:focus-visible span,
-.storefront-theme[data-theme="dark"] .footer-credit:focus-visible .relative > * {
-  color: #000000 !important;
-}
 /* admin theme: same light-blue primary on a dark surface */
 .admin-theme .hfx-nav-sliding-pill { --hfx-active-text: #0b1220; }
 
